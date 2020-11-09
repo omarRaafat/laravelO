@@ -21,7 +21,7 @@ use Illuminate\Support\LazyCollection;
 
 
 
-Auth::routes();cxvxcvxc
+Auth::routes();
 
 
 Route::group(['middleware' => ['auth' , 'verified']] ,function (){
