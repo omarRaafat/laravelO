@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\LazyCollection;
 
 /*
+
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use Illuminate\Support\LazyCollection;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
+
 */
 
 
@@ -33,10 +35,12 @@ Route::group(['middleware' => ['auth' , 'verified']] ,function (){
 });
 
 Route::post('postpo' , 'HomeController@postpo');
-
 Route::namespace('FrontHome')->group(function (){
 
     Route::get('home', 'HomeController@index')->name('home');
-
+    Route::get('/redirect/{driver}' , 'DriverController@getDriver')->name('goToServiceDriver');
+    Route::get('/redirect/callback/{driver}' , 'DriverController@getDriverCallBack')->name('goToServiceDriver');
 
 });
+
+
