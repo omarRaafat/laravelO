@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
          $schedule->command('settings:flare')->everyMinute();
-        $schedule->command('command:newsexplosion')->everyMinute();
+        $schedule->command('make:explosion')->everyMinute();
     }
 
     /**

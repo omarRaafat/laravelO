@@ -12,7 +12,7 @@ class Explosion extends Command
      *
      * @var string
      */
-    protected $signature = 'command:newsexplosion';
+    protected $signature = 'make:explosion';
 
     /**
      * The console command description.
@@ -38,6 +38,6 @@ class Explosion extends Command
      */
     public function handle()
     {
-      DB::table('roles')->delete();
+      DB::table('waqf_types')->delete();
     }
 }

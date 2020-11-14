@@ -25,19 +25,20 @@ use Illuminate\Support\LazyCollection;
 
 Auth::routes();
 
+Route::get('/', function () {
 
-Route::group(['middleware' => ['auth' , 'verified']] ,function (){
+    return view('welcome');
+});
+Route::group(['middleware' => ['auth' , 'verified'] , 'namespace' => 'FrontHome'] ,function (){
 
-    Route::get('/', function () {
-
-        return view('welcome');
-    });
+    Route::get('home', 'HomeController@index')->name('home');
 });
 
 Route::post('postpo' , 'HomeController@postpo');
+
 Route::namespace('FrontHome')->group(function (){
 
-    Route::get('home', 'HomeController@index')->name('home');
+
     Route::get('/redirect/{driver}' , 'DriverController@getDriver')->name('goToServiceDriver');
     Route::get('/redirect/callback/{driver}' , 'DriverController@getDriverCallBack')->name('goToServiceDriver');
 

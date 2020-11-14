@@ -12,7 +12,7 @@
             @endif
         </ul>
 
-       <img src="{{asset('files/'.\App\User::find(1)->file)}}" width="300px" height="300px">
+       <img src="{{url('files/'.\App\User::find(1)->file)}}" width="300px" height="300px">
         <form action="/postpo" method="post" enctype="multipart/form-data">
             @csrf
             <input type="file" name="file" accept="image/png">
