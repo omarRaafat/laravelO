@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\LazyCollection;
 
+
 /*
 
 |--------------------------------------------------------------------------
@@ -29,15 +30,15 @@ Route::get('/', function () {
 
     return view('welcome');
 });
-Route::group(['middleware' => ['auth' , 'verified'] , 'namespace' => 'FrontHome'] ,function (){
 
-    Route::get('home', 'HomeController@index')->name('home');
+Route::group(['namespace' => 'BackHome'] , function (){
+   Route::post('/user/check' , 'HomeController@checkUser')->name('user-check');
 });
 
-Route::post('postpo' , 'HomeController@postpo');
+Route::group(['namespace' =>'FrontHome'] ,function (){
 
-Route::namespace('FrontHome')->group(function (){
-
+    Route::get('home', 'HomeController@index')->name('home');
+    Route::post('postpo' , 'HomeController@postpo');
 
     Route::get('/redirect/{driver}' , 'DriverController@getDriver')->name('goToServiceDriver');
     Route::get('/redirect/callback/{driver}' , 'DriverController@getDriverCallBack')->name('goToServiceDriver');

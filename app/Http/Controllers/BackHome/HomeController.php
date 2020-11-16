@@ -4,11 +4,15 @@ namespace App\Http\Controllers\BackHome;
 
 use App\Http\Controllers\Controller;
 use App\User;
+
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+
 
 class HomeController extends Controller
 {
@@ -34,17 +38,19 @@ class HomeController extends Controller
         return  'hello from backend';
     }
 
-    public function postpo(Request  $request)
+    public function checkUser(Request  $request)
     {
 
-        // file
-        $file = $request->file('file');
-        // file name
-        $file_name =  time().'-'.$file->getClientOriginalName();
-        // store file to local storage
-        $file->move('files' , $file_name);
-         File::delete(public_path('files/'.User::find(1)->file));
-         User::find(1)->update(['file' => $file_name]);
-        return redirect()->back();
+       $validator =  Validator::make($request->all(),[
+            'email'=>'required|email',
+            'password'=>'required'
+        ]);
+
+        if ($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
+        return redirect()->back()->with('message' ,'success');
+
     }
 }
